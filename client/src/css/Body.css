@@ -1,0 +1,39 @@
+
+#body{
+
+    display:flex;
+    flex-direction: row;
+
+    height: 60%;
+    width: 100%;
+    background: lightsteelblue;
+
+}
+
+#nxt_button{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 3%;
+    width: 50%;
+}
+
+#side_menu{
+        width: 10%;
+         background: rgb(84, 106, 134);
+}
+#form_ant{
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 60%;
+    padding: 2%;
+}
+#formulario{
+
+    width: 30%;
+    display:flex;
+    flex-direction: column;
+    
+
+}
