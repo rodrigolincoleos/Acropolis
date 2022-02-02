@@ -10,45 +10,45 @@ import { NavLink } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 function Antecedentes_propiedad() {
-    
-    const [getid, setGetid] = useState(``);
+
+    const [getRegiones, setRegiones] = useState(``);
+    const [getProvincia, setProvincia] = useState(``);
+    const [getComuna, setComuna] = useState(``);
+    const [getRegid, setRegid] = useState(``);
 
     useEffect(() => {
 
         axios.get('http://localhost:3001/api/req/regiones').then((response) => {
 
-            setGetid(response.data);
-
-            console.log(getid);
+            setRegiones(response.data);
+            console.log(getRegiones);
 
         });
-        
 
-    });
+
+    },[]);
 
     return (
-   
-    <body id='body'>
 
-    <form id='formulario'>
+        <body id='body'>
 
-        <h1>Antecedentes Propiedad {getid.value}</h1>
+            <form id='formulario'>
+
+                <h1>Antecedentes Propiedad  </h1>
 
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
                         <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                        Region
+                            Region
                         </InputLabel>
-                        <NativeSelect
-                            defaultValue={0}
-                            inputProps={{
-                                name: 'age',
-                                id: 'uncontrolled-native',
-                            }}>
-                            <option value={10}>1</option>
-                            <option value={20}>2</option>
-                            <option value={30}>3</option>
-                            <option value={0}>Seleccione Region</option>
+                        <NativeSelect >
+                            {getRegiones.map((val, key) => {
+
+                                return (
+                                    <option value={val.key}>{val.region}</option>
+                                )
+                            })}
+
                         </NativeSelect>
                     </FormControl>
                 </Box>
@@ -56,7 +56,7 @@ function Antecedentes_propiedad() {
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
                         <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                        Comuna
+                            Comuna
                         </InputLabel>
                         <NativeSelect
                             defaultValue={0}
@@ -76,7 +76,7 @@ function Antecedentes_propiedad() {
                 <TextField id="standard-basic" label="Numeracion" variant="standard" />
                 <TextField id="standard-basic" label="Dpto/Casa" variant="standard" />
                 <TextField id="standard-basic" label="Villa/Poblacion" variant="standard" />
-                <NavLink to='https://github.com/rodrigolincoleos/Acropolis/antecedentes_ahorro'><Button variant="contained">Siguiente</Button></NavLink>                
+                <NavLink to='/antecedentes_ahorro'><Button variant="contained">Siguiente</Button></NavLink>
             </form>
         </body>
     );

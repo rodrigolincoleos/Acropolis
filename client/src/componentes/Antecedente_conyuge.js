@@ -74,7 +74,7 @@ export default function Antecedentes_Conyuge() {
             </form>
 
 <div id='nxt_button'>
-<NavLink to='https://github.com/rodrigolincoleos/Acropolis/antecedentes_propiedad' > <Button onClick={sqlHandler} variant="contained">Siguiente</Button></NavLink>
+<NavLink to='/antecedentes_propiedad' > <Button onClick={sqlHandler} variant="contained">Siguiente</Button></NavLink>
 
 </div>
    </div>

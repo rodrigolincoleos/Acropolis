@@ -15,20 +15,19 @@ import Mostrar_Persona from "./mostrar_persona";
 function Router() {
 
 
-    return(
+    return (
         <BrowserRouter>
             <Header />
             <div id='body'>
-            <Side_menu/>
-            <Routes basename={process.env.PUBLIC_URL} >
-                <Route exact path='https://github.com/rodrigolincoleos/Acropolis/antecedentes_persona' element={<Antecedentes_Personales/>} />
-                <Route exact path='https://github.com/rodrigolincoleos/Acropolis/antecedentes_propiedad' element={<Antecedentes_propiedad/>} />
-                <Route exact path='https://github.com/rodrigolincoleos/Acropolis/antecedentes_conyuge' element={<Antecedentes_Conyuge/>} />
-                <Route exact path='https://github.com/rodrigolincoleos/Acropolis/antecedentes_ahorro' element={<Antecedentes_Ahorro/>} />
-                <Route exact path='https://github.com/rodrigolincoleos/Acropolis/mostrar_persona' element={<Mostrar_Persona/>} />
-        
+                <Side_menu />
+                <Routes basename={process.env.PUBLIC_URL} >
+                    <Route exact path='/antecedentes_persona' element={<Antecedentes_Personales />} />
+                    <Route exact path='/antecedentes_propiedad' element={<Antecedentes_propiedad />} />
+                    <Route exact path='/antecedentes_conyuge' element={<Antecedentes_Conyuge />} />
+                    <Route exact path='/antecedentes_ahorro' element={<Antecedentes_Ahorro />} />
+                    <Route exact path='/mostrar_persona' element={<Mostrar_Persona />} />
 
-            </Routes>
+                </Routes>
             </div>
             <Footer />
         </BrowserRouter>

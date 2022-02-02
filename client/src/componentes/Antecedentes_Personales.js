@@ -31,9 +31,9 @@ export default function Antecedentes_Personales() {
     const handleChange = (event) => {
 
         if (event.target.value == 2 || event.target.value == 5) {
-            setLink('https://github.com/rodrigolincoleos/Acropolis/antecedentes_conyuge')
+            setLink('/antecedentes_conyuge')
         }else{
-            setLink('https://github.com/rodrigolincoleos/Acropolis/antecedentes_propiedad')
+            setLink('/antecedentes_propiedad')
         }
     };
 

@@ -24,6 +24,7 @@ app.post('/api/insertpers', (req, res) => {
     const apellido_2 = req.body.apellido_2;
     const rut = req.body.rut;
     const dv = req.body.dv;
+   
 
     db.query("INSERT INTO `persona`(`nombre_1`, `nombre_2`, `apellido_1`, `apellido_2`, `rut`, `dv`) VALUES (?,?,?,?,?,?)",
         [nombre_1, nombre_2, apellido_1, apellido_2, rut, dv],
@@ -32,20 +33,12 @@ app.post('/api/insertpers', (req, res) => {
         });
 
 });
-
-app.get("/api/req", (req, res) => {
-
-    db.query("SELECT `idpersona` FROM `persona` ORDER BY idpersona DESC LIMIT 1;", (err, result) => {
-
-        res.send(result)
-
-    })
-});
 app.get("/api/req/regiones", (req, res) => {
 
-    db.query("SELECT `idpersona` FROM `persona` ORDER BY idpersona DESC LIMIT 1;", (err, result) => {
+    db.query("SELECT * FROM `regiones`;", (err, result) => {
 
         res.send(result)
+        console.log(result);
 
     })
 });

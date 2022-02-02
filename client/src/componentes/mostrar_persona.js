@@ -5,10 +5,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography } from "@mui/material";
+import {  IconButton, Typography } from "@mui/material";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { ImSearch } from "react-icons/im";
 import { MdOutlineEditNote, MdDelete } from "react-icons/md";
+
+import Buscador from './Buscador';
 
 
 export default function Mostrar_Persona() {
@@ -16,13 +17,7 @@ export default function Mostrar_Persona() {
     return (
         <div id='mostrar_persona'>
 
-            <FormControl id="search">
-                <InputLabel >Buscar</InputLabel>
-                <OutlinedInput
-                    startAdornment={<InputAdornment position="start"><ImSearch /></InputAdornment>}
-                    label="Search"
-                />
-            </FormControl>
+            <Buscador />
 
             <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
                 <ListItem alignItems="flex-start">
@@ -40,8 +35,11 @@ export default function Mostrar_Persona() {
                                     color="text.primary"
                                 >
                                     Direccion:
+                                    <br />
                                 </Typography>
-                                {"Calle #2525, Comuna, Region "}
+                                {"Calle #2525"}
+                                <br />
+                                {"Comuna, Region"}
                                 <br />
                                 <Typography
                                     sx={{ display: 'inline' }}
@@ -51,7 +49,6 @@ export default function Mostrar_Persona() {
                                 >
                                     Telefono:
                                 </Typography>
-
                                 {" +56 9 xxxx xxxx"}
                             </React.Fragment>
                         }

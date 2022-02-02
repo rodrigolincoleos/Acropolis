@@ -15,9 +15,11 @@ function Side_menu() {
   return (
 
 
+
+
     <List id='side_menu' component="nav" aria-label="mailbox folders">
 
-      <NavLink to='/Acropolis.git/Antecedentes_persona'>
+      <NavLink to='/antecedentes_persona'>
         <ListItem button>
           <ListItemText primary="crear persona" />
         </ListItem>
@@ -29,7 +31,7 @@ function Side_menu() {
         <ListItemText primary="Crear proyectos" />
       </ListItem>
 
-      <NavLink to='/Acropolis.git/mostrar_persona'>
+      <NavLink to='/mostrar_persona'>
         <ListItem button>
           <ListItemText primary="Personas" />
         </ListItem>
@@ -41,8 +43,6 @@ function Side_menu() {
         <ListItemText primary="Proyectos" />
       </ListItem>
     </List>
-
-
   );
 }
 
