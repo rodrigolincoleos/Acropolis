@@ -37,7 +37,7 @@ export default function Antecedentes_Personales() {
         }
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
 
         axios.get('http://localhost:3001/api/req').then((response) => {
 
@@ -45,7 +45,7 @@ export default function Antecedentes_Personales() {
 
         });
       
-    });
+    });*/
 
     const sqlHandler = (event) => {
 
@@ -67,11 +67,6 @@ export default function Antecedentes_Personales() {
         })
     }
    
-
-       
-       
-
-
     return (
 
         <div id='form_ant'>

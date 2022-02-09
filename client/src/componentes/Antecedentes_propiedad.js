@@ -5,28 +5,39 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import Box from '@mui/material/Box';
-import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux'
+import { obtenerRegionesAccion, obtenerProvinciasAccion, obtenerComunasAccion} from '../redux/dropDucks'
+import { enviarInfoPropiedadAccion} from '../redux/antPropDucks'
 
 function Antecedentes_propiedad() {
 
-    const [getRegiones, setRegiones] = useState(``);
-    const [getProvincia, setProvincia] = useState(``);
-    const [getComuna, setComuna] = useState(``);
-    const [getRegid, setRegid] = useState(``);
+    const [getRegId, setRegId] = useState('');
+    const [getProvId, setProvId] = useState('');
+    const [getComId, setComId] = useState('');
+    const [getCalle, setCalle] = useState('');
+    const [getNum, setNum] = useState('');
+    const [getDpto, setDpto] = useState('');
+    const [getVilla, setVilla] = useState('');
+    
+    const dispatch = useDispatch();
 
-    useEffect(() => {
+    const drops = useSelector(store => store.drops.array)
+    const sendInfo = useSelector(store => store.antProp.array)
 
-        axios.get('http://localhost:3001/api/req/regiones').then((response) => {
+   // console.log(drops)
 
-            setRegiones(response.data);
-            console.log(getRegiones);
+    const info = {
+        region:getRegId,
+        provincia: getProvId,
+        comuna:getComId,
+        calle:getCalle,
+        numeracion:getNum,
+        dpto:getDpto,
+        villa:getVilla
+    }
 
-        });
-
-
-    },[]);
 
     return (
 
@@ -41,12 +52,21 @@ function Antecedentes_propiedad() {
                         <InputLabel variant="standard" htmlFor="uncontrolled-native">
                             Region
                         </InputLabel>
-                        <NativeSelect >
-                            {getRegiones.map((val, key) => {
+                        <NativeSelect
+                            onClick={() => dispatch(obtenerRegionesAccion())}
+                            onChange={(event) => {
+                                try {
+                                    setRegId(event.target.value);
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            }} >
+                            {drops.map((val, key) => {
 
                                 return (
-                                    <option value={val.key}>{val.region}</option>
+                                    <option id={val.key} value={val.id}>{val.region}</option>
                                 )
+
                             })}
 
                         </NativeSelect>
@@ -56,27 +76,87 @@ function Antecedentes_propiedad() {
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
                         <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                            Provincia
+                        </InputLabel>
+                        <NativeSelect
+                            onClick={() => dispatch(obtenerProvinciasAccion())}
+
+                            onChange={(event) => {
+                                try {
+                                    setProvId(event.target.value);
+                                } catch (error) {
+                                    console.log(error)
+                                }
+
+                            }}>
+                          {
+                                drops.map((val, key) => {
+
+                                    if (val.region_id == getRegId) {
+                                        return (
+                                            <option id={val.key} id={val.key}  value={val.id}>{val.provincia}</option>
+                                        )
+                                    }
+                                })
+                            }
+                        </NativeSelect>
+                    </FormControl>
+                </Box>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
                             Comuna
                         </InputLabel>
                         <NativeSelect
-                            defaultValue={0}
-                            inputProps={{
-                                name: 'age',
-                                id: 'uncontrolled-native',
-                            }}>
-                            <option value={10}>1</option>
-                            <option value={20}>2</option>
-                            <option value={30}>3</option>
-                            <option value={0}>Seleccione Comuna</option>
+                        
+                        onClick={() => dispatch(obtenerComunasAccion())}
+                        onChange={(event) => {
+                            try {
+                                setComId(event.target.value);
+                            } catch (error) {
+                                console.log(error)
+                            }
+
+                        }}
+
+                        >
+                            {
+                                drops.map((val, key) => {
+
+                                    if (val.provincia_id == getProvId) {
+                                        return (
+                                            <option id={val.key}  value={val.id}>{val.comuna}</option>
+                                        )
+                                    }
+                            })}
+
                         </NativeSelect>
                     </FormControl>
                 </Box>
 
-                <TextField id="standard-basic" label="Calle o AV" variant="standard" />
-                <TextField id="standard-basic" label="Numeracion" variant="standard" />
-                <TextField id="standard-basic" label="Dpto/Casa" variant="standard" />
-                <TextField id="standard-basic" label="Villa/Poblacion" variant="standard" />
-                <NavLink to='/antecedentes_ahorro'><Button variant="contained">Siguiente</Button></NavLink>
+
+                <TextField id="standard-basic" label="Calle o AV" variant="standard" 
+                onChange={(event) => {
+                   setCalle(event.target.value)
+                }}/>
+                <TextField id="standard-basic" label="Numeracion" variant="standard"  
+                onChange={(event) => {
+                   setNum(event.target.value)
+                }} />
+                <TextField id="standard-basic" label="Dpto/Casa" variant="standard"  
+                onChange={(event) => {
+                   setDpto(event.target.value)
+                }} />
+                <TextField id="standard-basic" label="Villa/Poblacion" variant="standard"  
+                onChange={(event) => {
+                   setVilla(event.target.value)
+                }} />
+                <NavLink to='/antecedentes_ahorro'><Button variant="contained" 
+                onClick={()=>{ 
+                    dispatch(enviarInfoPropiedadAccion()()) 
+                    console.log(info)
+                }}>
+                    Siguiente</Button></NavLink>
             </form>
         </body>
     );
