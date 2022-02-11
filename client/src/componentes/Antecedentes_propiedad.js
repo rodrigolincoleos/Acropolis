@@ -8,8 +8,8 @@ import Box from '@mui/material/Box';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux'
-import { obtenerRegionesAccion, obtenerProvinciasAccion, obtenerComunasAccion} from '../redux/dropDucks'
-import { enviarInfoPropiedadAccion} from '../redux/antPropDucks'
+import { obtenerRegionesAccion, obtenerProvinciasAccion, obtenerComunasAccion,obtenerIdPers } from '../redux/dropDucks'
+import axios from 'axios';
 
 function Antecedentes_propiedad() {
 
@@ -22,30 +22,37 @@ function Antecedentes_propiedad() {
     const [getVilla, setVilla] = useState('');
     
     const dispatch = useDispatch();
-
+    
     const drops = useSelector(store => store.drops.array)
-    const sendInfo = useSelector(store => store.antProp.array)
+   
+    const sqlHandler = () => {
 
-   // console.log(drops)
+       
+        axios.post('http://localhost:3001/api/ins/direccion',
 
-    const info = {
-        region:getRegId,
-        provincia: getProvId,
-        comuna:getComId,
-        calle:getCalle,
-        numeracion:getNum,
-        dpto:getDpto,
-        villa:getVilla
+        {
+            region: getRegId,
+            provincia: getProvId,
+            comuna: getComId,
+            calle: getCalle,
+            numeracion: getNum,
+            dpto: getDpto,
+            villa: getVilla
+        }
+
+    ).then(() => {
+
+        alert('insertado')
+    })
     }
-
 
     return (
 
-        <body id='body'>
+        <div id='body'>
 
             <form id='formulario'>
 
-                <h1>Antecedentes Propiedad  </h1>
+                <h1>Antecedentes Propiedad {} </h1>
 
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
@@ -89,12 +96,12 @@ function Antecedentes_propiedad() {
                                 }
 
                             }}>
-                          {
+                            {
                                 drops.map((val, key) => {
 
                                     if (val.region_id == getRegId) {
                                         return (
-                                            <option id={val.key} id={val.key}  value={val.id}>{val.provincia}</option>
+                                            <option id={val.key} value={val.id}>{val.provincia}</option>
                                         )
                                     }
                                 })
@@ -108,16 +115,16 @@ function Antecedentes_propiedad() {
                             Comuna
                         </InputLabel>
                         <NativeSelect
-                        
-                        onClick={() => dispatch(obtenerComunasAccion())}
-                        onChange={(event) => {
-                            try {
-                                setComId(event.target.value);
-                            } catch (error) {
-                                console.log(error)
-                            }
 
-                        }}
+                            onClick={() => dispatch(obtenerComunasAccion())}
+                            onChange={(event) => {
+                                try {
+                                    setComId(event.target.value);
+                                } catch (error) {
+                                    console.log(error)
+                                }
+
+                            }}
 
                         >
                             {
@@ -125,40 +132,37 @@ function Antecedentes_propiedad() {
 
                                     if (val.provincia_id == getProvId) {
                                         return (
-                                            <option id={val.key}  value={val.id}>{val.comuna}</option>
+                                            <option id={val.key} value={val.id}>{val.comuna}</option>
                                         )
                                     }
-                            })}
+                                })}
 
                         </NativeSelect>
                     </FormControl>
                 </Box>
 
 
-                <TextField id="standard-basic" label="Calle o AV" variant="standard" 
-                onChange={(event) => {
-                   setCalle(event.target.value)
-                }}/>
-                <TextField id="standard-basic" label="Numeracion" variant="standard"  
-                onChange={(event) => {
-                   setNum(event.target.value)
-                }} />
-                <TextField id="standard-basic" label="Dpto/Casa" variant="standard"  
-                onChange={(event) => {
-                   setDpto(event.target.value)
-                }} />
-                <TextField id="standard-basic" label="Villa/Poblacion" variant="standard"  
-                onChange={(event) => {
-                   setVilla(event.target.value)
-                }} />
-                <NavLink to='/antecedentes_ahorro'><Button variant="contained" 
-                onClick={()=>{ 
-                    dispatch(enviarInfoPropiedadAccion()()) 
-                    console.log(info)
-                }}>
-                    Siguiente</Button></NavLink>
+                <TextField id="standard-basic" label="Calle o AV" variant="standard"
+                    onChange={(event) => {
+                        setCalle(event.target.value)
+                    }} />
+                <TextField id="standard-basic" label="Numeracion" variant="standard"
+                    onChange={(event) => {
+                        setNum(event.target.value)
+                    }} />
+                <TextField id="standard-basic" label="Dpto/Casa" variant="standard"
+                    onChange={(event) => {
+                        setDpto(event.target.value)
+                    }} />
+                <TextField id="standard-basic" label="Villa/Poblacion" variant="standard"
+                    onChange={(event) => {
+                        setVilla(event.target.value)
+                    }} />
+                <NavLink to='/antecedentes_ahorro'>
+                    <Button variant="contained" onClick={sqlHandler}> Siguiente</Button>
+                </NavLink>
             </form>
-        </body>
+        </div>
     );
 }
 export default Antecedentes_propiedad;

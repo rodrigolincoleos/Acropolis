@@ -9,7 +9,6 @@ const dataInicial = {
 const OBTENER_REGIONES_EXITO = 'OBTENER_REGIONES_EXITO'
 const OBTENER_PROVINCIAS_EXITO = 'OBTENER_PROVINCIAS_EXITO'
 const OBTENER_COMUNAS_EXITO = 'OBTENER_COMUNAS_EXITO'
-const ENVIAR_INFO_EXITO = 'ENVIAR_INFO_EXITO'
 
 
 // reducer
@@ -97,25 +96,6 @@ export const obtenerComunasAccion = () => async (dispatch, getState) => {
             })
             localStorage.setItem('comunas', JSON.stringify(response.data))
 
-        });
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-export const enviarInfoPropiedadAccion = () => async (dispatch, getState) => {
-
-    console.log('getState', getState().dataInicial.ant_prop)
-
-    try {
-        await axios.post('http://localhost:3001/api/antpropiedad').then((response) => {
-
-            dispatch({
-                type: ENVIAR_INFO_EXITO,
-                payload: response.data
-
-            })
-            console.log('desde  dispatch ' + response)
         });
     } catch (error) {
         console.log(error)
