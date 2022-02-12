@@ -9,6 +9,7 @@ const dataInicial = {
 const OBTENER_REGIONES_EXITO = 'OBTENER_REGIONES_EXITO'
 const OBTENER_PROVINCIAS_EXITO = 'OBTENER_PROVINCIAS_EXITO'
 const OBTENER_COMUNAS_EXITO = 'OBTENER_COMUNAS_EXITO'
+const BUSCAR_PERS_EXITO = 'BUSCAR_PERS_EXITO'
 
 
 // reducer
@@ -21,6 +22,8 @@ export default function dropReducer(state = dataInicial, action) {
         case OBTENER_PROVINCIAS_EXITO:
             return { ...state, array: action.payload }
         case OBTENER_COMUNAS_EXITO:
+            return { ...state, array: action.payload }
+        case BUSCAR_PERS_EXITO:
             return { ...state, array: action.payload }
         default:
             return state
@@ -95,6 +98,23 @@ export const obtenerComunasAccion = () => async (dispatch, getState) => {
                 payload: response.data
             })
             localStorage.setItem('comunas', JSON.stringify(response.data))
+
+        });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const buscarPersAccion = () => async (dispatch, getState) => {
+   
+    try {
+        await axios.get('http://localhost:3001/api/req/searchpers').then((response) => {
+
+            dispatch({
+                type: BUSCAR_PERS_EXITO,
+                payload: response.data
+            })
+            
 
         });
     } catch (error) {

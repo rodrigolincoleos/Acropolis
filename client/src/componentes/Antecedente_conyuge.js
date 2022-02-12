@@ -40,7 +40,7 @@ export default function Antecedentes_Conyuge() {
 
        <div>
              <form id='formulario-conyuge'>
-            <h1>Antecedentes Conyuge {/*antpersona.Nombre_1*/}</h1>
+            <h1>Antecedentes Conyuge </h1>
             <TextField id="standard-basic" label="Nombres" variant="standard"
                     onChange={(event) => {
                         let splited = event.target.value.split(' ');
