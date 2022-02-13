@@ -57,9 +57,6 @@ export default function Mostrar_Persona() {
                     onChange={(event) => {
                         dispatch(buscarPersAccion())
 
-
-
-
                         axios.post('http://localhost:3001/api/insert/searchpers',
 
                             {
@@ -69,18 +66,19 @@ export default function Mostrar_Persona() {
                         ).then(() => {
                         })
                     }}
+                    
                 />
             </FormControl>
 
 
             <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-                
+                {drops.map((val)=>(
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3HMcXMq2gtNWrWcF2b6vhrb3ownaU7QKrVwGC3nT6QoTkWSdJFclbkjgiaT_E3RALfEM&usqp=CAU" />
                     </ListItemAvatar>
                     <ListItemText
-                        primary='nombre apellido'
+                        primary={val.nombre_1+" "+val.apellido_1}
                         secondary={
                             <React.Fragment>
                                 <Typography
@@ -102,9 +100,11 @@ export default function Mostrar_Persona() {
                                     variant="body2"
                                     color="text.primary"
                                 >
-                                    Telefono:
+                                    Contacto:
                                 </Typography>
-                                {" +56 9 xxxx xxxx"}
+                                {val.telefono}
+                                <br />
+                                {val.email}
                             </React.Fragment>
                         }
 
@@ -124,8 +124,7 @@ export default function Mostrar_Persona() {
                     </IconButton>
 
                 </ListItem>
-
-
+                ))}
             </List>
         </div>
     );

@@ -24,9 +24,8 @@ export default function Antecedentes_Personales() {
     const [Telefono, setTelefono] = useState('');
     const [Nacimiento, setNacimiento] = useState('');
     const [RSH, setRSH] = useState('');
+    const [es, setEs] = useState('');
     const [getLink, setLink] = useState('')
-    const [getid, setGetid] = useState(``);
-    const [idpersona, setIdpersona] = useState('');
 
     const handleChange = (event) => {
 
@@ -35,6 +34,7 @@ export default function Antecedentes_Personales() {
         }else{
             setLink('/antecedentes_propiedad')
         }
+        setEs(event.target.value)
     };
 
     /*useEffect(() => {
@@ -58,7 +58,13 @@ export default function Antecedentes_Personales() {
                 apellido_1: Apellido1,
                 apellido_2: Apellido2,
                 rut: Rut,
-                dv: dv
+                dv: dv,
+                telefono:Telefono,
+                mail:Mail,
+                nac:Nacimiento,
+                rsh:RSH,
+                es:es
+
             }
 
         ).then(() => {
