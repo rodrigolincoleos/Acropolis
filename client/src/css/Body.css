@@ -1,12 +1,14 @@
 
 #body{
 
+    color:#f5ebe0;
+    text-decoration: none;
     display:flex;
     flex-direction: row;
 
     height: 60%;
     width: 100%;
-    background: lightsteelblue;
+    background: #8e9dc7;
 
 }
 
@@ -17,10 +19,6 @@
     width: 50%;
 }
 
-#side_menu{
-        width: 10%;
-         background: rgb(84, 106, 134);
-}
 #form_ant{
     display:flex;
     justify-content: center;

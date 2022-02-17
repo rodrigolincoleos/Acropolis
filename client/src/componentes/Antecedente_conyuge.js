@@ -1,24 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../css/antecedentes_conyuge.css';
 import TextField from '@mui/material/TextField';
-import { NavLink, useParams } from 'react-router-dom';
-import axios from 'axios';
+import * as axios from 'axios';
 import { Button } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import Stack from '@mui/material/Stack';
 
-export default function Antecedentes_Conyuge() {
 
+
+export default function Antecedentes_conyuge() {
+
+    
     const [Nombre1, setNombre1] = useState('');
     const [Nombre2, setNombre2] = useState('');
     const [Apellido1, setApellido1] = useState('');
     const [Apellido2, setApellido2] = useState('');
     const [Rut, setRut] = useState('');
     const [dv, setDv] = useState('');
+    const [Mail, setMail] = useState('');
+    const [Telefono, setTelefono] = useState('');
+    const [value, setValue] = useState(new Date());
 
+   
 
     const sqlHandler = (event) => {
 
 
-        axios.post('http://localhost:3001/api/insertpers',
+        axios.post('http://localhost:3001/api/insert/conyuge',
             {
 
                 nombre_1: Nombre1,
@@ -26,7 +37,11 @@ export default function Antecedentes_Conyuge() {
                 apellido_1: Apellido1,
                 apellido_2: Apellido2,
                 rut: Rut,
-                dv: dv
+                dv: dv,
+                telefono:Telefono,
+                mail:Mail,
+                nac:value,
+
             }
 
         ).then(() => {
@@ -34,14 +49,17 @@ export default function Antecedentes_Conyuge() {
             alert('insertado')
         })
     }
-
    
     return (
 
-       <div>
-             <form id='formulario-conyuge'>
-            <h1>Antecedentes Conyuge </h1>
-            <TextField id="standard-basic" label="Nombres" variant="standard"
+        <div id='form_ant'>
+
+            <h1>Antecedentes Conyuge</h1>
+
+            <form id='formulario'>
+            <Stack spacing={3}>
+
+                <TextField id="standard-basic" label="Nombres" variant="standard"
                     onChange={(event) => {
                         let splited = event.target.value.split(' ');
                         console.log(splited)
@@ -66,17 +84,38 @@ export default function Antecedentes_Conyuge() {
                         setDv(splited[1])
                     }} />
 
-                <TextField id="standard-basic" label="Mail" variant="standard" />
-                <TextField id="standard-basic" label="Telefono" variant="standard" />
-                <TextField id="standard-basic" label="Fecha Nacimiento" variant="standard" />
-                <TextField id="standard-basic" label="Reg. Soc. Hogares" variant="standard" />
+                <TextField id="standard-basic" label="Mail" variant="standard" onChange={(event) => {
+                    setMail(event.target.value)
+                }} />
 
+                <TextField id="standard-basic" label="Telefono" variant="standard" onChange={(event) => {
+                    setTelefono(event.target.value)
+                }} />
+                <LocalizationProvider id='datepicker' dateAdapter={AdapterDateFns}>
+                   
+                <DesktopDatePicker
+                            disableFuture
+                            label="Fecha Nacimiento"
+                            openTo="year"
+                            views={['day', 'month', 'year']}
+                            value={value}
+                            onChange={(newValue) => {
+                                setValue(newValue.toString().slice(4,-44));
+                                console.log(value)
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+
+                  
+                </LocalizationProvider>
+                </Stack>
             </form>
+            <div id='nxt_button'>
+                <NavLink to='/antecedentes_propiedad' > <Button onClick={sqlHandler} variant="contained">Siguiente</Button></NavLink>
 
-<div id='nxt_button'>
-<NavLink to='/antecedentes_propiedad' > <Button onClick={sqlHandler} variant="contained">Siguiente</Button></NavLink>
+            </div>
+        </div>
 
-</div>
-   </div>
     );
+
 }

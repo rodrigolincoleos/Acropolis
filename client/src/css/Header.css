@@ -1,5 +1,22 @@
 #header{
-    height: 20%;
-    width: 100%;
-    background: rgb(141, 155, 170);
+
+	
+    background:url(https://cdn2.civitatis.com/chile/valparaiso/galeria/big/cerros-valparaiso.jpg) no-repeat center center fixed;
+    background-size:cover;
+	height:100px;
+	width: 100%;
+	left:0;
+	top:0;
+
+    display: flex;
+    justify-content: center;
+}
+
+#titulo{
+
+    font-size: 20px;
+    color:#f5ebe0;
+    outline: #534255;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    
 }

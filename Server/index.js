@@ -24,10 +24,15 @@ app.post('/api/insertpers', (req, res) => {
     const apellido_2 = req.body.apellido_2;
     const rut = req.body.rut;
     const dv = req.body.dv;
+    const telefono = req.body.telefono;
+    const mail = req.body.mail;
+    const nac = req.body.nac;
+    const rsh = req.body.rsh;
+    const es = req.body.es;
    
 
-    db.query("INSERT INTO `persona`(`nombre_1`, `nombre_2`, `apellido_1`, `apellido_2`, `rut`, `dv`) VALUES (?,?,?,?,?,?)",
-        [nombre_1, nombre_2, apellido_1, apellido_2, rut, dv],
+    db.query("INSERT INTO `persona`(`nombre_1`, `nombre_2`, `apellido_1`, `apellido_2`, `rut`, `dv`,`telfono`,`mail`,`fecha_nac`,`rsh`,`est_civ`) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        [nombre_1, nombre_2, apellido_1, apellido_2, rut, dv,telefono,mail,nac,rsh,es],
         (err, result) => {
         });
 
@@ -90,6 +95,28 @@ app.get("/api/req/idpers", (req, res) => {
 
     })
 });
+
+let ir = ('')
+
+app.post('/api/insert/searchpers', (req, res) => {
+
+    ir = req.body.ir;  
+     
+});
+
+app.get("/api/req/searchpers", (req, res) => {
+
+    console.log('desde get '+ir)
+
+    db.query("SELECT * FROM `persona` WHERE `nombre_1` LIKE '%"+ir+"%'OR `nombre_2` LIKE '%"+ir+"%' OR `apellido_1` LIKE '%"+ir+"%'OR `apellido_2` LIKE '%"+ir+"%' OR `rut` LIKE '%"+ir+"%' OR `dv` LIKE '%"+ir+"%';", (err, result) => {
+
+        res.send(result)
+        console.log(result)
+
+
+    })
+});
+
 
 
 app.listen(3001, (req, res) => {

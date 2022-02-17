@@ -18,7 +18,7 @@ function Antecedentes_Ahorro() {
 
     const sqlHandler = () => {
 
-        axios.post('http://localhost:3001/api/ins/ahorro',
+        axios.post('http://localhost:3001/api/insert/ahorro',
 
         {
             cta:getCta,

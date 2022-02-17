@@ -9,6 +9,7 @@ import Antecedentes_Personales from "./Antecedentes_Personales";
 import Antecedentes_propiedad from "./Antecedentes_propiedad";
 import Antecedentes_Ahorro from "./Antecedentes_ahorro";
 import Antecedentes_Conyuge from "./Antecedente_conyuge";
+import Body from "./Antecedente_conyuge";
 
 import Mostrar_Persona from "./mostrar_persona";
 
@@ -19,8 +20,9 @@ function Router() {
         <BrowserRouter>
             <Header />
             <div id='body'>
-                <Side_menu />
+                 <Side_menu />
                 <Routes basename={process.env.PUBLIC_URL} >
+                   
                     <Route exact path='/antecedentes_persona' element={<Antecedentes_Personales />} />
                     <Route exact path='/antecedentes_propiedad' element={<Antecedentes_propiedad />} />
                     <Route exact path='/antecedentes_conyuge' element={<Antecedentes_Conyuge />} />
@@ -29,6 +31,7 @@ function Router() {
 
                 </Routes>
             </div>
+
             <Footer />
         </BrowserRouter>
 
