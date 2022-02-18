@@ -9,9 +9,8 @@ import Antecedentes_Personales from "./Antecedentes_Personales";
 import Antecedentes_propiedad from "./Antecedentes_propiedad";
 import Antecedentes_Ahorro from "./Antecedentes_ahorro";
 import Antecedentes_Conyuge from "./Antecedente_conyuge";
-import Body from "./Antecedente_conyuge";
-
 import Mostrar_Persona from "./mostrar_persona";
+import Crear_Proyectos from "./Crear_proyecto";
 
 function Router() {
 
@@ -28,6 +27,7 @@ function Router() {
                     <Route exact path='/antecedentes_conyuge' element={<Antecedentes_Conyuge />} />
                     <Route exact path='/antecedentes_ahorro' element={<Antecedentes_Ahorro />} />
                     <Route exact path='/mostrar_persona' element={<Mostrar_Persona />} />
+                    <Route exact path='/crear_proyecto' element={<Crear_Proyectos />} />
 
                 </Routes>
             </div>

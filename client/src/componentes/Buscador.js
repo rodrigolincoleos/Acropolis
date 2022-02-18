@@ -17,7 +17,7 @@ function Buscador() {
             let e = event.target.value
             search = e
 
-            axios.post('http://localhost:3001/api/insert/searchpers',
+            axios.post('http://localhost:3001/api/ins/searchpers',
 
                 {
                     ir: e

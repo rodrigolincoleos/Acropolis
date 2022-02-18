@@ -1,59 +1,48 @@
 import React, { useState } from 'react';
 import '../css/Antecedentes_personales.css';
 import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import { Button,Stack } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
-import * as axios from 'axios';
-import { Button } from '@mui/material';
-import { NavLink } from 'react-router-dom';
-
 
 
 export default function Crear_Proyectos() {
 
-    
-    const [getNombre, setNombre] = useState('');
+    const [getNombreOrg, setNombreOrg] = useState('');
+    const [getNombrePr, setNombrePr] = useState('');
+    const [getPJ, setPJ] = useState('');
+    const [getRepLeg, setRepLeg] = useState('');
+    const [getTipo, setTipo] = useState('');
 
-    const handleChange = (event) => {
 
-        if (event.target.value == 2 || event.target.value == 5) {
-            setLink('/antecedentes_conyuge')
-        }else{
-            setLink('/antecedentes_propiedad')
-        }
-        setEs(event.target.value)
-    };
 
-    
 
     const sqlHandler = (event) => {
 
+        if (getTipo === 0) {
+            console.log('Seleccione Opcion')
+        } else {
+            axios.post('http://localhost:3001/api/ins/crear_proyecto',
+                {
+                    NombreOrg:getNombreOrg,
+                    NombrePr:getNombrePr,
+                    PJ:getPJ,
+                    RepLeg:getRepLeg,
+                    Tipo:getTipo
 
-        axios.post('http://localhost:3001/api/insertpers',
-            {
+                }
 
-                nombre_1: Nombre1,
-                nombre_2: Nombre2,
-                apellido_1: Apellido1,
-                apellido_2: Apellido2,
-                rut: Rut,
-                dv: dv,
-                telefono:Telefono,
-                mail:Mail,
-                nac:Nacimiento,
-                rsh:RSH,
-                es:es
+            ).then(() => {
 
-            }
-
-        ).then(() => {
-
-            alert('insertado')
-        })
+                alert('insertado')
+            })
+        }
     }
-   
+
     return (
 
         <div id='form_ant'>
@@ -61,72 +50,55 @@ export default function Crear_Proyectos() {
             <h1>Crear Proyecto</h1>
 
             <form id='formulario'>
-                <TextField id="standard-basic" label="Nombre" variant="standard"
+            <Stack spacing={3}>
+                <TextField id="standard-basic" label="Nombre Organizacion" variant="standard"
                     onChange={(event) => {
-                        setNombre(event.target.value)
-
+                        setNombreOrg(event.target.value)
                     }} />
 
-                <TextField id="standard-basic" label="Apellidos" variant="standard"
+                <TextField id="standard-basic" label="Nombre Proyecto" variant="standard"
                     onChange={(event) => {
-                        let splited = event.target.value.split(' ');
+                        setNombrePr(event.target.value)
                     }} />
 
-                <TextField id="standard-basic" label="Rut" variant="standard"
+                <TextField id="standard-basic" label="Personalidad Juridica" variant="standard"
                     onChange={(event) => {
-                        let splited = event.target.value.split('-');
-                        console.log(splited)
-                        setRut(splited[0])
-                        setDv(splited[1])
+                        setPJ(event.target.value)
                     }} />
 
-                <TextField id="standard-basic" label="Mail" variant="standard" onChange={(event) => {
-                    setMail(event.target.value)
-                }} />
-
-                <TextField id="standard-basic" label="Telefono" variant="standard" onChange={(event) => {
-                    setTelefono(event.target.value)
-                }} />
-
-                <TextField id="standard-basic" label="Fecha Nacimiento" variant="standard"
+                <TextField id="standard-basic" label="Representante Legal" variant="standard"
                     onChange={(event) => {
-                        setNacimiento(event.target.value)
-
+                        setRepLeg(event.target.value)
                     }} />
-                <TextField id="standard-basic" label="Reg. Soc. Hogares" variant="standard" onChange={(event) => {
-                    setRSH(event.target.value)
-
-                }} />
 
                 <Box id='datos-box' sx={{ minWidth: 120 }} >
                     <FormControl fullWidth>
                         <InputLabel variant="standard" htmlFor="uncontrolled-native">Estado civil</InputLabel>
-                        <NativeSelect
+                        <NativeSelect defaultValue={0}
 
-                            onChange={handleChange}
-                            defaultValue={0}
-                            inputProps={{
-                                name: 'age',
-                                id: 'uncontrolled-native',
-                            }}>
+                            onChange={(event) => {
+
+                                setTipo(event.target.value)
+                            }}
+
+                            >
                             <option value={0}>Seleccione Opcion</option>
-                            <option value={1}>Soltero(a)</option>
-                            <option value={2}>Casado(a)</option>
-                            <option value={3}>Divorciado(a)</option>
-                            <option value={4}>Viudo(a)</option>
-                            <option value={5}>AUC</option>
+                            <option value={1}>techumbre</option>
+                            <option value={2}>banco de material</option>
+                            <option value={3}>electrico</option>
+                            <option value={4}>renovable</option>
 
-                         
+
 
                         </NativeSelect>
 
                     </FormControl>
                 </Box>
-       
 
+            </Stack>
             </form>
             <div id='nxt_button'>
-                <NavLink to={getLink} > <Button onClick={sqlHandler} variant="contained">Siguiente</Button></NavLink>
+                <NavLink to='' > <Button onClick={sqlHandler} variant="contained">Siguiente</Button></NavLink>
 
             </div>
         </div>

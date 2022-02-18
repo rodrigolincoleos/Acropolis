@@ -7,7 +7,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineEditNote, MdDelete } from "react-icons/md";
-import { FormControl, Hidden, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography } from "@mui/material";
+import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography } from "@mui/material";
 import { ImSearch } from "react-icons/im";
 import { buscarPersAccion } from '../redux/dropDucks'
 import { useDispatch, useSelector } from 'react-redux'

@@ -29,7 +29,7 @@ export default function Antecedentes_conyuge() {
     const sqlHandler = (event) => {
 
 
-        axios.post('http://localhost:3001/api/insert/conyuge',
+        axios.post('http://localhost:3001/api/ins/conyuge',
             {
 
                 nombre_1: Nombre1,

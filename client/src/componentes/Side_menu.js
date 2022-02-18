@@ -20,20 +20,24 @@ function Side_menu() {
     <List id='side_menu' component="nav" aria-label="mailbox folders">
 
       <NavLink id="sm_link" to='/antecedentes_persona'>
-        <ListItem  button>
-          <ListItemText primary="crear persona" />
+        <ListItem button>
+          <ListItemText primary="Crear Persona" />
         </ListItem>
       </NavLink>
 
       <Divider />
 
-      <ListItem button divider>
-        <ListItemText id="sm_link" primary="Crear proyectos" />
-      </ListItem>
-
-      <NavLink id="sm_link"  to='/mostrar_persona'>
+      <NavLink id="sm_link" to='/crear_proyecto'>
         <ListItem button>
-          <ListItemText  primary="Personas" />
+          <ListItemText primary="Crear Proyecto" />
+        </ListItem>
+      </NavLink>
+
+      <Divider />
+
+      <NavLink id="sm_link" to='/mostrar_persona'>
+        <ListItem button>
+          <ListItemText primary="Personas" />
         </ListItem>
       </NavLink>
 

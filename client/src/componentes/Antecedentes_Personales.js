@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
 import '../css/Antecedentes_personales.css';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import NativeSelect from '@mui/material/NativeSelect';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import * as axios from 'axios';
-import { Button } from '@mui/material';
+import { Button,Box,InputLabel,NativeSelect,TextField,Stack,FormControl } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import Stack from '@mui/material/Stack';
-
 
 
 export default function Antecedentes_Personales() {
@@ -44,7 +37,7 @@ export default function Antecedentes_Personales() {
     const sqlHandler = (event) => {
 
 
-        axios.post('http://localhost:3001/api/insert/pers',
+        axios.post('http://localhost:3001/api/ins/pers',
             {
 
                 nombre_1: Nombre1,
